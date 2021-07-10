@@ -1,0 +1,11 @@
+{
+	"name": "KVsqltoadls",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://get-key.vault.azure.net/"
+		}
+	}
+}

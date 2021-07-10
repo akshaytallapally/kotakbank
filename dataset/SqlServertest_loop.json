@@ -1,0 +1,13 @@
+{
+	"name": "SqlServertest_loop",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLIR1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

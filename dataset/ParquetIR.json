@@ -1,0 +1,21 @@
+{
+	"name": "ParquetIR",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSCon",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "tables/dept",
+				"fileSystem": "1906container"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

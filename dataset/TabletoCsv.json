@@ -1,0 +1,17 @@
+{
+	"name": "TabletoCsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLIR1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "emp"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

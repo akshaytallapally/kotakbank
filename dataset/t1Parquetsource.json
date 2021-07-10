@@ -1,0 +1,31 @@
+{
+	"name": "t1Parquetsource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSCon",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "data_04e8d54a-b950-4ac7-9b89-6f10770ab0ce_36d0339c-8c9d-4f40-a25f-a8557bdf875d.parquet",
+				"folderPath": "tables/t1",
+				"fileSystem": "1906container"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT32"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

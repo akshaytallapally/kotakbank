@@ -1,0 +1,49 @@
+{
+	"name": "ErrorHandling",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ErrorTable",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "ErrorTable",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "ErrorTable",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "ConditionalSplit1"
+				}
+			],
+			"script": "source(output(\n\t\tDate as string,\n\t\tProductName as string,\n\t\tCompany as string,\n\t\tQuantity as string,\n\t\tLocation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 derive(Description = 'File_1.Csv') ~> DerivedColumn1\nDerivedColumn1 split(isNull(toDate(Date,'dd-mm-yyyy')),\n\tisNull(toInteger(ProductName)),\n\tdisjoint: false) ~> ConditionalSplit1@(ErrorRow, Errorrow2, GoodRows)\nConditionalSplit1@ErrorRow sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tDate as string,\n\t\tProductName as string,\n\t\tcompany as string,\n\t\tQuantity as string,\n\t\tLocation as string,\n\t\tDescription as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tpreSQLs:['truncate table sales_faulty_data;'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tDate,\n\t\tProductName,\n\t\tcompany = Company,\n\t\tQuantity,\n\t\tLocation,\n\t\tDescription\n\t)) ~> sink1\nConditionalSplit1@GoodRows sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tDate as string,\n\t\tProductName as string,\n\t\tcompany as string,\n\t\tQuantity as string,\n\t\tLocation as string,\n\t\tDescription as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink2\nConditionalSplit1@Errorrow2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tDate as string,\n\t\tProductName as string,\n\t\tcompany as string,\n\t\tQuantity as string,\n\t\tLocation as string,\n\t\tDescription as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink3"
+		}
+	}
+}

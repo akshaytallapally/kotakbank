@@ -1,0 +1,42 @@
+{
+	"name": "File",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "inflow",
+						"type": "DatasetReference"
+					},
+					"name": "productDetails"
+				},
+				{
+					"dataset": {
+						"referenceName": "Inflow2",
+						"type": "DatasetReference"
+					},
+					"name": "ProductNo"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "FlowOut",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregate"
+				},
+				{
+					"name": "Join1"
+				}
+			],
+			"script": "source(output(\n\t\tDate as string,\n\t\tProductName as string,\n\t\tCompany as string,\n\t\tQuantity as short,\n\t\tLocation as string,\n\t\tProductID as short\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> productDetails\nsource(output(\n\t\tProductID as string,\n\t\tBrand as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ProductNo\nproductDetails aggregate(groupBy(ProductID),\n\tNoOfProducts = count(ProductName)) ~> aggregate\naggregate, ProductNo join(toString(aggregate@ProductID) == ProductNo@ProductID,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['UpdatedProductDetails.Csv'],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tBrand,\n\t\tNoOfProducts\n\t),\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}

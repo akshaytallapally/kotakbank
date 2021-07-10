@@ -1,0 +1,16 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=AKSHAY-LAPTOP;initial catalog=accenture;user id=IRuser",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5NDVmOGRmZS0yZWQyLTRlN2YtOTFmMS0xNzRmNDg0ZmQ0YWYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "MyIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

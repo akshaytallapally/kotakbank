@@ -1,0 +1,42 @@
+{
+	"name": "GoodFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLCon",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EmpNo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EmpName",
+				"type": "varchar"
+			},
+			{
+				"name": "DeptName",
+				"type": "varchar"
+			},
+			{
+				"name": "sal",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "MobNo",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "StaffDetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

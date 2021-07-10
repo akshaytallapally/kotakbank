@@ -1,0 +1,27 @@
+{
+	"name": "DS_t11",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLCon",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "name",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "t11"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
