@@ -1,0 +1,35 @@
+{
+	"name": "DailyLogsData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_dummy",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_log",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "parameters{\n\tADFName as string,\n\tPipelineName as string,\n\tRunid as string,\n\tStatus as string,\n\tTriggerName as string,\n\tFileLogs as string\n}\nsource(output(\n\t\tColumn_1 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 derive(ADFName = $ADFName,\n\t\tPipelineName = $PipelineName,\n\t\tStatus = $Status,\n\t\tRuniD = $Runid,\n\t\tTriggerName = $TriggerName) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tADFName,\n\t\tPipelineName,\n\t\tStatus,\n\t\tRuniD,\n\t\tTriggerName\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($FileLogs)],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}
