@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF1906"
+		},
+		"LSParameters_connectionString": {
+			"value": ""
+		},
+		"SQLCon_connectionString": {
+			"value": ""
+		},
+		"SQLIR1_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"ADLSCon_properties_typeProperties_url": {
+			"value": "https://2ndstorage1906.dfs.core.windows.net"
+		},
+		"KVsqltoadls_properties_typeProperties_baseUrl": {
+			"value": "https://get-key.vault.azure.net/"
+		},
+		"KVtoADLS_properties_typeProperties_baseUrl": {
+			"value": "https://get-key.vault.azure.net/"
+		},
+		"CopyActivity_properties_typeProperties_scope": {
+			"value": "/subscriptions/b35c4e1a-35ca-4e04-94b6-ad40e2e46081/resourceGroups/res_dev/providers/Microsoft.Storage/storageAccounts/2ndstorage1906"
+		}
+	}
+}

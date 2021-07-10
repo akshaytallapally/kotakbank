@@ -1,0 +1,198 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF1906"
+		},
+		"LSParameters_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LSParameters'"
+		},
+		"SQLCon_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLCon'"
+		},
+		"SQLIR1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLIR1'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"ADLSCon_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://2ndstorage1906.dfs.core.windows.net"
+		},
+		"KVsqltoadls_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://get-key.vault.azure.net/"
+		},
+		"KVtoADLS_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://get-key.vault.azure.net/"
+		},
+		"CopyActivity_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/b35c4e1a-35ca-4e04-94b6-ad40e2e46081/resourceGroups/res_dev/providers/Microsoft.Storage/storageAccounts/2ndstorage1906"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADF1906_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LSParameters_connectionString": {
+						"value": "[parameters('LSParameters_connectionString')]"
+					},
+					"SQLCon_connectionString": {
+						"value": "[parameters('SQLCon_connectionString')]"
+					},
+					"SQLIR1_connectionString": {
+						"value": "[parameters('SQLIR1_connectionString')]"
+					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"KVsqltoadls_properties_typeProperties_baseUrl": {
+						"value": "[parameters('KVsqltoadls_properties_typeProperties_baseUrl')]"
+					},
+					"KVtoADLS_properties_typeProperties_baseUrl": {
+						"value": "[parameters('KVtoADLS_properties_typeProperties_baseUrl')]"
+					},
+					"ADLSCon_properties_typeProperties_url": {
+						"value": "[parameters('ADLSCon_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ADF1906_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF1906_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ADF1906_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF1906_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ADF1906_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF1906_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ADF1906_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF1906_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "ADF1906_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"CopyActivity_properties_typeProperties_scope": {
+						"value": "[parameters('CopyActivity_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF1906_ArmTemplate_4')]"
+			]
+		}
+	]
+}
