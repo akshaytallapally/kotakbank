@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "DS_log",
+						"referenceName": "DS_LogFile",
 						"type": "DatasetReference"
 					},
 					"name": "Log1"

@@ -52,10 +52,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_log",
+						"referenceName": "DS_LogFile",
 						"type": "DatasetReference",
 						"parameters": {
-							"LogFile": {
+							"FileName": {
 								"value": "@variables('FileName')",
 								"type": "Expression"
 							}
@@ -131,14 +131,6 @@
 										"FileLogs": {
 											"value": "'@{variables('FileName')}'",
 											"type": "Expression"
-										}
-									},
-									"datasetParameters": {
-										"sink1": {
-											"LogFile": {
-												"value": "@variables('FileName')",
-												"type": "Expression"
-											}
 										}
 									}
 								},
