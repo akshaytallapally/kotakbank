@@ -25,9 +25,6 @@
 		},
 		"KVtoADLS_properties_typeProperties_baseUrl": {
 			"value": "https://get-key.vault.azure.net/"
-		},
-		"CopyActivity_properties_typeProperties_scope": {
-			"value": "/subscriptions/b35c4e1a-35ca-4e04-94b6-ad40e2e46081/resourceGroups/res_dev/providers/Microsoft.Storage/storageAccounts/2ndstorage1906"
 		}
 	}
 }
